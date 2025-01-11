@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import tailwindcssAnimate from "tailwindcss-animate";
 export default {
   darkMode: ["class"],
   content: [
@@ -8,13 +9,30 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        hero: "url('/images/hero-background.png')",
+      },
       colors: {
         dark: {
           1: "#1C1F2E",
           2: "#161925",
         },
-        blue:{
-          1:"#0E78F9"
+        blue: {
+          1: "#0E78F9",
+        },
+        sky: {
+          1: "#C9DDFF",
+          2: "#ECF0FF",
+          3: "#F5FCFF",
+        },
+        orange: {
+          1: "#FF742E",
+        },
+        purple: {
+          1: "#830EF9",
+        },
+        yellow: {
+          1: "#F9A90E",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -64,5 +82,6 @@ export default {
       },
     },
   },
-  
+
+  plugins: [tailwindcssAnimate],
 };

@@ -1,0 +1,21 @@
+StreamVideo
+StreamCall
+StreamTheme
+
+--- APIS
+StreamVideoClient for call creation 
+use user id for quering inside the client and getting specific meeting 
+
+--- Hook
+useStreamVideoClient for getting the client and then quering it 
+useCall for getting the current call
+
+--UI
+VideoPreview
+DeviceSettings
+CallParticipantsList
+CallControls
+CallStatsButton
+
+--- css file
+import "@stream-io/video-react-sdk/dist/css/styles.css";

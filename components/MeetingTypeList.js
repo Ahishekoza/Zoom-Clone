@@ -9,6 +9,7 @@ import { useUser } from "@clerk/nextjs";
 import { Textarea } from "./ui/textarea";
 import ReactDatePicker from "react-datepicker";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "./ui/input";
 
 const initialValues = {
   dateTime: new Date(),
@@ -23,7 +24,7 @@ const MeetingTypeList = () => {
   const [values, setValues] = useState(initialValues);
   const client = useStreamVideoClient();
   const { user } = useUser();
- const {toast} = useToast()
+  const { toast } = useToast();
 
   const handleCreateMeeting = async () => {
     if (!client || !user) return;
@@ -59,7 +60,7 @@ const MeetingTypeList = () => {
     }
   };
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -93,7 +94,7 @@ const MeetingTypeList = () => {
         handleClick={() => router.push("/recordings")}
       />
 
-      {/* Modals */}
+      {/* Scheduling meeting */}
       {!callDetail ? (
         <MeetingModal
           title="Create Meeting"
@@ -145,7 +146,7 @@ const MeetingTypeList = () => {
           buttonText="Copy Meeting Link"
         />
       )}
-
+      {/* Creating an instant meeting */}
       {meetingState === "isInstantMeeting" && (
         <MeetingModal
           title="Start an Instant Meeting"
@@ -158,6 +159,22 @@ const MeetingTypeList = () => {
           handleClick={handleCreateMeeting}
         />
       )}
+
+      {/* --- Joining Invitation */}
+      <MeetingModal
+        onOpen={meetingState === "isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        handleClick={() => router.push(values.link)}
+        title="Type the link here"
+        className="text-center"
+        buttonText="Join Meeting"
+      >
+        <Input
+          placeholder="Meeting Link"
+          onChange={(e) => setValues({ ...values, link: e.target.value })}
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
+      </MeetingModal>
     </div>
   );
 };

@@ -19,3 +19,5 @@ CallStatsButton
 
 --- css file
 import "@stream-io/video-react-sdk/dist/css/styles.css";
+
+destructure state attribute of call object which you get from useCall do get the meeting values
